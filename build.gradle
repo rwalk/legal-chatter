@@ -1,0 +1,30 @@
+group 'org.rwalk'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'application'
+
+mainClassName = "org.rwalk.legalchatter.TranscriberDemo"
+
+// argument parsing for the gradle application plugin
+run {
+    if (System.getProperty("exec.args") != null) {
+        args System.getProperty("exec.args").split()
+    }
+}
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.7'
+    compile group: 'com.googlecode.soundlibs', name: 'mp3spi', version: '1.9.5-2'
+    compile group: 'com.googlecode.soundlibs', name: 'soundlibs', version: '1.3', ext: 'pom'
+    compile group: 'edu.cmu.sphinx', name: 'sphinx4-core', version:'5prealpha-SNAPSHOT'
+    compile group: 'edu.cmu.sphinx', name: 'sphinx4-data', version:'5prealpha-SNAPSHOT'
+}
